@@ -1,0 +1,198 @@
+:root {
+  --ff-primary: Heebo, sans-serif;
+  --ff-secondary: Bungee, cursive;
+  --ff-accent: Bungee Shade, cursive;
+}
+/* Box sizing rules */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Remove default margin */
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--ff-secondary);
+}
+
+/* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
+/* Set core root defaults */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+/* Set core body defaults */
+body {
+  min-height: 100vh;
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+/* A anchor elements that don't have a class get default styles */
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+/* Make images easier to work with */
+img,
+picture {
+  max-width: 100%;
+  display: block;
+}
+
+/* Inherit fonts for inputs and buttons */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  font-family: var(--ff-primary);
+  font-size: 1rem;
+  /* for demo purpose only */
+  padding: 2rem 0;
+}
+
+.stacked {
+  display: grid;
+}
+/*  If grid items resides in same space that means same col and row
+  so they obiviously will get overlap and that time some content hide by 
+   another so we can use z-index to bring specific content on top
+  So Here you do not need any positioing to use z-index if container is grid 
+  then thier grid-items can use z-index 
+
+  **here card-content is grid item
+
+  .card__content {
+       z-index: 2;
+  }
+
+  */
+/* .card__content {
+  z-index: 2;
+} */
+
+/* Here by place all grid items in same space , i mean
+same row and same col we have overlapped them  */
+
+.stacked > * {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+}
+
+.container {
+  max-width: 100rem;
+  margin-inline: auto;
+  padding-inline: 2rem;
+}
+
+.product-grid {
+  display: grid;
+  /* 99% we use auto-fit  */
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 0.25rem;
+}
+
+.card {
+  /* aspact-ratio: w / h */
+  aspect-ratio: 1 / 1.5;
+}
+
+.card__content {
+  background-color: white;
+  align-self: end;
+  padding: 0.5rem;
+  margin: 1rem 0.5rem 2rem;
+  box-shadow: 0 0.5rem 2rem rgb(0 0 0 / 0.1);
+}
+
+.card__title {
+  font-size: 1.25em;
+  line-height: 1.1;
+  color: firebrick;
+}
+
+.card__price {
+  font-size: 1.75rem;
+}
+
+.card_description {
+  font-size: 1rem;
+}
+
+.card__img {
+  width: 100%;
+  /* Most of time when we add images as part
+  of our layout then all image will not align to same height or i 
+  mean some images will be streached and some will be sort so 
+  in order to make those images of same size we have following property
+  it is used to make images of same size by setting thier
+  aspect ratio fraction same */
+
+  /* aspact-ratio: w / h */
+  aspect-ratio: 1 / 1.25;
+  object-fit: cover;
+}
+
+/* here in below styling we could have written .featured instead of .card.featured
+ but we want below styling with high specificty so that's why i have added
+ double classes to add styling to featured
+*/
+/* We want featured from 35em width so we have added inside media query */
+@media screen and (min-width: 35em) {
+  .card__img {
+    aspect-ratio: 1 / 1;
+  }
+  .card.featured {
+    grid-row: span 2;
+    grid-column: span 2;
+  }
+
+  .card.featured .card__img {
+    aspect-ratio: 1 / 1.25;
+  }
+
+  .card.featured .card__title {
+    font-size: 1.75rem;
+  }
+}
